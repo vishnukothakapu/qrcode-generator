@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Qr code generator</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap" rel="stylesheet">
+    </head>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background: #3A86FF;
+    font-family: 'Poppins',sans-serif;
+}
+h2 {
+   text-align: center;
+}
+.container, #qrWrapper {
+    background: #fff;
+    width: 300px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    padding: 2em;
+    box-shadow: 0 1.4em 3em rgba(20, 16, 39, 0.3);
+    border-radius: .25em;
+}
+#qrWrapper {
+    display: none;
+}
+input {
+    width: 100%;
+    padding: 0.8em 1.4em;
+    font-family: 'Poppins',sans-serif;
+    margin-top: 1em;
+    border-radius: .25em;
+    border: none;
+    outline: none;
+    border: 1px solid #aaa;
+}
+input:hover,input:focus {
+    border-color: #3A86FF;
+}
+a {
+    text-align: center;
+    font-family: 'Poppins',sans-serif;
+}
+button,#loadBtn {
+    width: 100%;
+    padding: 0.8em 1.4em;
+    margin-top: 1em;
+    font-family: 'Poppins',sans-serif;
+    border: none;
+    font-size: 1em;
+    cursor: pointer;
+    background: #3A86FF;
+    color: #fff;
+    border-radius: .25em;
+}
+#loadBtn {
+    display: none;
+    cursor: not-allowed;
+    opacity: 50%;
+}
+.load {
+    width: 20px;
+    border-radius: 50%;
+    border: 1px solid transparent ;
+    height: 20px;
+    display: block;
+    border-top: 1px solid #fff;
+    border-left: 1px solid #fff;
+    margin: auto;
+    animation: load 1s ease infinite;
+    transition: all 0.5s ease;
+}
+@keyframes load {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+    </style>
+    <body>
+        <div class="container" id="container">
+        <h2>Qr Code Generator</h2>
+            <input type="text" id="input" placeholder="Enter text here">
+            <button id="btn">Generate</button>
+            <button id="loadBtn" disabled><div class="load"></div></button>
+        </div>
+        <div id="qrWrapper">
+              <center>
+        <img src="" id="img"></center>
+        <center><a href="" id="link" download>Download</a></center>
+        </div>
+        <script type="text/javascript">
+        btn = document.getElementById("btn");
+        img = document.getElementById("img");
+        input = document.getElementById("input");
+        link = document.getElementById("link");
+        qrWrapper= document.getElementById("qrWrapper");
+        container = document.getElementById("container");
+        btn.onclick=()=> {
+            if(input.value.length==0) {
+                alert("Please enter something!");
+            }
+            else {
+                img.src="https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl="+input.value;     link.href="https://chart.googleapis.com/chart?cht=qr&chs=150x150&chl="+input.value;
+                setTimeout(()=> container.style.display="none",
+                3000);
+                setTimeout(()=>     qrWrapper.style.display="block",3000);
+                setTimeout(()=> btn.style.display="none",
+                1000);
+                setTimeout(()=> loadBtn.style.display="block",
+                1000);
+            }
+        }
+        </script>
+    </body>
+</html>
